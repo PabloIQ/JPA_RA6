@@ -1,6 +1,7 @@
 package com.hlc.cliente_uno_a_muchos_pedido.config;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
@@ -9,6 +10,7 @@ import org.springframework.stereotype.Component;
 import com.github.javafaker.Faker;
 import com.hlc.cliente_uno_a_muchos_pedido.entidad.Cliente;
 import com.hlc.cliente_uno_a_muchos_pedido.entidad.Pedido;
+import com.hlc.cliente_uno_a_muchos_pedido.entidad.Producto;
 import com.hlc.cliente_uno_a_muchos_pedido.repositorio.*;
 
 @Component
@@ -19,6 +21,8 @@ public class InicializadorDatos implements CommandLineRunner  {
 	
 	@Autowired
 	private PedidoRepository pedidoRepository;
+	
+	private ProductoRepositorio productoRepository;
 	
 	private Faker faker = new Faker();
 
@@ -39,6 +43,20 @@ public class InicializadorDatos implements CommandLineRunner  {
             }
         }
 		
+		for (int i = 0; i < 10; i++) {
+			Producto producto = new Producto();
+			producto.setNombre(faker.pokemon());
+			producto.setDescripcion(faker.lorem().sentence());
+			producto.setPeso(faker.number());
+			producto.setStock(faker.number());
+			productoRepository.save(producto);
+		}
+		
+		List<Producto> productosDisponibles = productoRepository.findAll();
+		
+		for (int i = 0; i < 10; i++) {
+			
+		}
 	}
 
 }

@@ -1,6 +1,8 @@
 package com.hlc.cliente_uno_a_muchos_pedido.entidad;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -37,6 +39,9 @@ public class Pedido {
 	@JoinColumn(name = "cliente_id", nullable = false)
 	@ManyToOne
 	private Cliente cliente;
+	
+	
+	private List<Producto> productos = new ArrayList<Producto>();
 	
     public Pedido() {}
 
