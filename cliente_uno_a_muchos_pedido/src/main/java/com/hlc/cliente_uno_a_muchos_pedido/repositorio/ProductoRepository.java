@@ -8,7 +8,7 @@ import com.hlc.cliente_uno_a_muchos_pedido.entidad.Producto;
 import com.hlc.cliente_uno_a_muchos_pedido.entidad.Pedido;
 
 
-public interface ProductoRepositorio extends JpaRepository<Producto, Long> {
+public interface ProductoRepository extends JpaRepository<Producto, Long> {
 
-	List<Producto> findByPedidos(List<Pedido> pedidos);
+	List<Producto> findByNombre(String nombre);
 }
