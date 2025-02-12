@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import com.hlc.cliente_uno_a_muchos_pedido.entidad.Pedido;
 import com.hlc.cliente_uno_a_muchos_pedido.servicio.ClienteServicio;
 import com.hlc.cliente_uno_a_muchos_pedido.servicio.PedidoServicio;
+import com.hlc.cliente_uno_a_muchos_pedido.servicio.ProductoServicio;
 
 import jakarta.validation.Valid;
 
@@ -30,6 +31,9 @@ public class PedidoControlador {
     @Autowired
     private ClienteServicio clienteServicio;
 
+    @Autowired
+    private ProductoServicio productoServicio;
+    
     @GetMapping
     public String listarPedidos(Model model) {
         List<Pedido> pedidos = pedidoServicio.obtenerTodosLosPedidos();
@@ -41,6 +45,7 @@ public class PedidoControlador {
     public String mostrarFormularioNuevoPedido(Model model) {
         model.addAttribute("pedido", new Pedido());
         model.addAttribute("clientes", clienteServicio.obtenerTodosLosClientes());
+        model.addAttribute("productos", productoServicio.obtenerTodosLosProducto());
         return VISTA_FORMULARIO;
     }
 
@@ -49,6 +54,7 @@ public class PedidoControlador {
         if (bindingResult.hasErrors()) {
             model.addAttribute("pedido", pedido);
             model.addAttribute("clientes", clienteServicio.obtenerTodosLosClientes());
+            model.addAttribute("productos", productoServicio.obtenerTodosLosProducto());
             return VISTA_FORMULARIO;
         }
         pedidoServicio.guardarPedido(pedido);
@@ -69,4 +75,3 @@ public class PedidoControlador {
         return REDIRECT_LISTADO;
     }
 }
-

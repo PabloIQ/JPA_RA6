@@ -2,6 +2,7 @@ package com.hlc.cliente_uno_a_muchos_pedido.servicio;
 
 import java.util.List;
 
+import com.hlc.cliente_uno_a_muchos_pedido.entidad.Pedido;
 import com.hlc.cliente_uno_a_muchos_pedido.entidad.Producto;
 
 public interface ProductoServicio {
@@ -11,4 +12,5 @@ public interface ProductoServicio {
     List<Producto> obtenerTodosLosProducto();
     Producto actualizarProducto(Long id, Producto producto);
     void eliminarProducto(Long id);
+    List<Producto> obtenerProductosPorPedidos(Pedido pedido);
 }

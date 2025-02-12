@@ -11,6 +11,8 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotBlank;
@@ -40,20 +42,24 @@ public class Pedido {
 	@ManyToOne
 	private Cliente cliente;
 	
-	
-	private List<Producto> productos = new ArrayList<Producto>();
+	@ManyToMany
+	@JoinTable(name = "producto_pedido",
+	        joinColumns = @JoinColumn(name = "pedido_id"),
+	        inverseJoinColumns = @JoinColumn(name = "producto_id"))
+	private List<Producto> productos;
 	
     public Pedido() {}
 
 
 	public Pedido(Long id, @Past LocalDateTime fecha, @NotBlank @NotNull String descripcion, @NotNull Integer cantidad,
-			Cliente cliente) {
+			Cliente cliente, List<Producto> productos) {
 		super();
 		this.id = id;
 		this.fecha = fecha;
 		this.descripcion = descripcion;
 		this.cantidad = cantidad;
 		this.cliente = cliente;
+		this.productos = productos;
 	}
 
 
@@ -96,8 +102,14 @@ public class Pedido {
 	public void setCliente(Cliente cliente) {
 		this.cliente = cliente;
 	}
-	
-	
-	
-	
+
+
+	public List<Producto> getProductos() {
+		return productos;
+	}
+
+
+	public void setProductos(List<Producto> productos) {
+		this.productos = productos;
+	}
 }

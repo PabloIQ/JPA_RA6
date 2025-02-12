@@ -9,6 +9,7 @@
     <div class="container mt-4">
         <h1>Clientes</h1>
         <a href="/clientes/nuevo" class="btn btn-primary mb-3">Agregar Cliente</a>
+		<a th:href="@{/productos}" class="btn btn-primary mb-3">Ver Productos</a>
 
         <table class="table table-striped">
             <thead>
@@ -23,7 +24,7 @@
                     <td>
                         <a th:href="@{/clientes/editar/{id}(id=${cliente.id})}" class="btn btn-warning btn-sm">Editar</a>
                         <a th:href="@{/clientes/eliminar/{id}(id=${cliente.id})}" class="btn btn-danger btn-sm">Eliminar</a>
-                     	 <a th:href="@{/clientes/{id}/pedidos(id=${cliente.id})}" class="btn btn-info btn-sm">Ver Pedidos</a>
+                     	<a th:href="@{/clientes/{id}/pedidos(id=${cliente.id})}" class="btn btn-info btn-sm">Ver Pedidos</a>
                     </td>
                 </tr>
             </tbody>

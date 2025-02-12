@@ -3,11 +3,14 @@ package com.hlc.cliente_uno_a_muchos_pedido.servicio;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
+import com.hlc.cliente_uno_a_muchos_pedido.entidad.Pedido;
 import com.hlc.cliente_uno_a_muchos_pedido.entidad.Producto;
 import com.hlc.cliente_uno_a_muchos_pedido.excepcion.RecursoNoEncontradoException;
 import com.hlc.cliente_uno_a_muchos_pedido.repositorio.ProductoRepository;
 
+@Service
 public class ProductoServicioImpl implements ProductoServicio {
 	
 	@Autowired
@@ -47,4 +50,12 @@ public class ProductoServicioImpl implements ProductoServicio {
 		productoRepository.delete(producto);
 		
 	}
+
+	@Override
+	public List<Producto> obtenerProductosPorPedidos(Pedido pedido) {
+		
+		return null;
+	}
+
+	
 }

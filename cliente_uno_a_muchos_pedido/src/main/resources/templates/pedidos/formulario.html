@@ -36,6 +36,17 @@
                 </select>
             </div>
 
+			
+			<div class="mb-3">
+			                <label for="productos" class="form-label">Productos</label>
+			                <select class="form-control" id="productos" th:field="*{productos}" multiple="multiple">
+			                    <option th:each="producto : ${productos}" 
+			                            th:value="${producto.id}" 
+			                            th:text="${producto.nombre}">
+			                    </option>
+			                </select>
+			            </div>
+			
             <button type="submit" class="btn btn-primary">Guardar</button>
             <a th:href="@{/pedidos}" class="btn btn-secondary">Cancelar</a>
         </form>

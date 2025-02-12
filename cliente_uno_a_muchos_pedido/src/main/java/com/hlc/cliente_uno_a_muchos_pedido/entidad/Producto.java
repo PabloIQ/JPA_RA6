@@ -13,6 +13,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotBlank;
@@ -42,20 +43,24 @@ public class Producto {
 	@NotNull
 	private int stock;
 	
-	@JoinColumn(name = "pedido_id", nullable = false)
 	@ManyToMany
-	private List<Pedido> pedidos = new ArrayList<Pedido>();
+	@JoinTable(
+		    name = "producto_pedido",
+		    joinColumns = @JoinColumn(name="producto_id"),
+		    inverseJoinColumns = @JoinColumn(name="pedido_id"))
+	private List<Pedido> pedidos;
 
 	public Producto() {}
 
 	public Producto(Long id, @NotNull @NotBlank String nombre, @NotBlank @NotNull String descripcion,
-			@NotBlank @NotNull float peso, @NotBlank @NotNull int stock) {
+			@NotBlank @NotNull float peso, @NotBlank @NotNull int stock, List<Pedido> pedidos) {
 		super();
 		this.id = id;
 		this.nombre = nombre;
 		this.descripcion = descripcion;
 		this.peso = peso;
 		this.stock = stock;
+		this.pedidos = pedidos;
 	}
 
 	public Long getId() {
@@ -104,20 +109,5 @@ public class Producto {
 
 	public void setPedidos(List<Pedido> pedidos) {
 		this.pedidos = pedidos;
-	}
-
-	public void setNombre(Pokemon pokemon) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	public void setPeso(Number number) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	public void setStock(Number number) {
-		// TODO Auto-generated method stub
-		
 	}
 }
